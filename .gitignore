@@ -1,0 +1,9 @@
+node_modules/
+Makefile
+dist
+.DS_Store
+logs/*
+.idea/
+tmp/
+*.log
+*.iml

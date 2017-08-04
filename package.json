@@ -1,0 +1,25 @@
+{
+  "name": "memo-cache.js",
+  "version": "1.0.0",
+  "description": "A simple in-memory cache for node and browser, based on Map.",
+  "main": "cache.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yss/memo-cache.js.git"
+  },
+  "keywords": [
+    "node",
+    "cache",
+    "memory",
+    "map"
+  ],
+  "author": "yss <yss.nelson@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/yss/memo-cache.js/issues"
+  },
+  "homepage": "https://github.com/yss/memo-cache.js#readme"
+}
