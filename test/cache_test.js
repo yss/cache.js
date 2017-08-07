@@ -44,4 +44,23 @@ describe('memo-cache.js', function () {
             memoCache.get('k3').should.equal('v3');
         });
     });
+
+    describe('setTtl()', function () {
+        it('should get the value before 0.3second', function (done) {
+            memoCache.setTtl(0.3);
+            memoCache.set('k1', 'v1');
+            setTimeout(function () {
+                memoCache.get('k1').should.equal('v1');
+                done();
+            }, 256);
+        });
+        it('should not get the value after 0.3second', function (done) {
+            memoCache.setTtl(0.3);
+            memoCache.set('k1', 'v1');
+            setTimeout(function () {
+                (memoCache.get('k1') === undefined).should.equal(true);
+                done();
+            }, 356);
+        });
+    });
 });

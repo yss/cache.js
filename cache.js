@@ -4,9 +4,14 @@
 'use strict';
 
 class Cache extends Map {
-    constructor () {
+    /**
+     * memory cache
+     * @param {number} [ttl] time to live
+     */
+    constructor (ttl) {
         super ();
 
+        this._ttl = ttl && typeof ttl === 'number' ? ttl : 5;
         this._timerMap = new Map();
     }
     /**
@@ -25,11 +30,32 @@ class Cache extends Map {
         super.set(key, value);
 
         // remove it after timeout
-        const timer = setTimeout(this.delete.bind(this, key), (typeof ttl === 'number' ? ttl : 5) * 1000);
+        const timer = setTimeout(this.delete.bind(this, key), (typeof ttl === 'number' ? ttl : this._ttl) * 1000);
         // and prevent the setTimeout from stop the server shutdown on node environment
         timer.unref && timer.unref();
 
         this._timerMap.set(key, timer);
+    }
+
+    /**
+     * change the default ttl
+     * or one key's ttl
+     *
+     * @param {number} ttl
+     * @param {*} [key]
+     */
+    setTtl (ttl, key) {
+        if (typeof ttl !== 'number') {
+            return;
+        }
+
+        if (!key) {
+            this._ttl = ttl;
+        } else if (this.has(key)) {
+            let value = this.get(key);
+            this.delete(key);
+            this.set(key, value, ttl);
+        }
     }
 
     'delete' (key) {
