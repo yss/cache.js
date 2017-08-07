@@ -11,9 +11,10 @@
     "url": "git+https://github.com/yss/memo-cache.js.git"
   },
   "keywords": [
-    "node",
     "cache",
     "memory",
+    "node",
+    "js",
     "map"
   ],
   "author": "yss <yss.nelson@gmail.com>",

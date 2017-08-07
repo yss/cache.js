@@ -1,6 +1,7 @@
 # cache.js
     This is a very very very simple memory cache which inherit from Map.
     Use it just like the same with Map.
+    It can use in browser, also node environment.
 
 ## Install
 
@@ -23,8 +24,8 @@ memoCache.set('key', value, 60);
 // get a cache value
 const val = memoCache.get('key');
 
-// remove a cache
-memoCache.remove('key');
+// delete a cache
+memoCache.delete('key');
 
 // check if exists
 memoCache.has('key'); // return false
@@ -49,6 +50,14 @@ Only add one argument `ttl` when compare with `Map.prototype.set`.
 This `ttl` argument is used to set the expired time of this key. and the unit of `ttl` is second.
 
 All the Map method see: <https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map>
+
+## Compatibility
+
+*In Node:* use it anyway.*
+
+*In Browser:*
+
+See caniusemap<http://caniuse.com/#search=map>
 
 ## Test
 
