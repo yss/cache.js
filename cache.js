@@ -3,9 +3,12 @@
  */
 'use strict';
 
-const timerMap = new Map();
-
 class Cache extends Map {
+    constructor () {
+        super ();
+
+        this._timerMap = new Map();
+    }
     /**
      * set cache with expired time
      *
@@ -23,14 +26,17 @@ class Cache extends Map {
 
         // remove it after timeout
         const timer = setTimeout(this.delete.bind(this, key), (typeof ttl === 'number' ? ttl : 5) * 1000);
-        // and prevent the setTimeout from stop the server shutdown
-        timer.unref();
+        // and prevent the setTimeout from stop the server shutdown on node environment
+        timer.unref && timer.unref();
 
-        timerMap.set(key, timer);
+        this._timerMap.set(key, timer);
     }
 
     'delete' (key) {
         super.delete(key);
+
+        const timerMap = this._timerMap;
+
         if (timerMap.has(key)) {
             clearTimeout(timerMap.get(key));
             timerMap.delete(key);

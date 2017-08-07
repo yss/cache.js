@@ -1,6 +1,6 @@
 # cache.js
     This is a very very very simple memory cache which inherit from Map.
-    Use it just almost the same with Map.
+    Use it just like the same with Map.
 
 ## Install
 
